@@ -140,7 +140,7 @@ git submodule update --init --recursive
                 sha = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
                 shaish = sh(script: "git rev-parse --short=5 HEAD", returnStdout: true).trim()
 
-                currentbranch = sh(script: "it branch | grep \*", returnStdout: true).trim()
+                currentbranch = sh(script: "git branch | grep \\*", returnStdout: true).trim()
                 println "Crurrent branch is ${currentbranch}"
 
             }
