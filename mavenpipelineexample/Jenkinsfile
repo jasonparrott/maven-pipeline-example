@@ -24,33 +24,34 @@ def shouldMerge() {
 }
 
 def pipelineSuccess() {
-    node("master") {
-        emailext (
-          subject: "Success: ${BRANCH_NAME} (${releaseVersion})",
-          body: """
-Status: Succeeded
-Branch: ${BRANCH_NAME}
-Version: ${releaseVersion}
-Jenkins URL: ${env.BUILD_URL}
-""",
-          to: "${authorEmail}"
-        )
-    }
+//    node("master") {
+//        emailext (
+//          subject: "Success: ${BRANCH_NAME} (${releaseVersion})",
+//          body: """
+//Status: Succeeded
+//Branch: ${BRANCH_NAME}
+//Version: ${releaseVersion}
+//Jenkins URL: ${env.BUILD_URL}
+//""",
+//          to: "${authorEmail}"
+//        )
+//    }
 }
 
 def pipelineFailure(stage, exception) {
-    node("master") {
-        emailext (
-          subject: "Failure: ${BRANCH_NAME} (${releaseVersion}): ${stage}",
-          body: """
-Status: Failed at stage "${stage}" with "${exception.toString()}"
-Branch: ${BRANCH_NAME}
-Version: ${releaseVersion}
-Jenkins URL: ${env.BUILD_URL}
-""",
-          to: "${authorEmail}"
-        )
-    }
+//return
+//    node("master") {
+//        emailext (
+//          subject: "Failure: ${BRANCH_NAME} (${releaseVersion}): ${stage}",
+//          body: """
+//Status: Failed at stage "${stage}" with "${exception.toString()}"
+//Branch: ${BRANCH_NAME}
+//Version: ${releaseVersion}
+//Jenkins URL: ${env.BUILD_URL}
+//""",
+//          to: "${authorEmail}"
+//        )
+//    }
 }
 // Workspace must be cleaned from last run in order to make stash and git clone work.
 def cleanNode(name, closure) {
