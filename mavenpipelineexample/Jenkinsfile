@@ -19,7 +19,8 @@ releaseVersion = ""
 // Utils
 //Does the branch namespace contain "ready", and should therefore be regarded as an integration branch.
 def shouldMerge() {
-    return "${BRANCH_NAME}" ==~ /^${MERGE_BRANCH_PREFIX}\/.*/
+//    return "${BRANCH_NAME}" ==~ /^${MERGE_BRANCH_PREFIX}\/.*/
+    return true;
 }
 
 def pipelineSuccess() {
@@ -31,7 +32,6 @@ Status: Succeeded
 Branch: ${BRANCH_NAME}
 Version: ${releaseVersion}
 Jenkins URL: ${env.BUILD_URL}
-Release URL: ${RELEASE_URL}/${releaseVersion}
 """,
           to: "${authorEmail}"
         )
@@ -88,7 +88,7 @@ def conditionalLock(condition, name, closure) {
 
 // Stages
 
-println "Parameters: branch: ${BRANCH_NAME}, target: ${TARGET_BRANCH_NAME}, merge: ${shouldMerge()}, release URL: ${RELEASE_URL}"
+println "Parameters: branch: ${BRANCH_NAME}, target: ${TARGET_BRANCH_NAME}, merge: ${shouldMerge()}"
 
 conditionalLock(shouldMerge(), "pipeline-merge-lock") {
     // The following stages are locked to ensure that only one pipeline runs at
