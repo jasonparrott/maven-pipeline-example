@@ -2,7 +2,7 @@ package org.company;
 
 public class BusinessLogic {
     public int doubleTheValue(int x) {
-        System.out.println("New Code Change J6b!");
+        System.out.println("New Code Change J8!");
         return x * 2;
     }
 }
