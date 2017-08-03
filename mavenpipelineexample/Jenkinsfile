@@ -235,20 +235,11 @@ verifyLinux("linux", "${VERIFY_COMMAND}")
 
 
 
-stageWithGuard("Upload") {
+stageWithGuard("Deploy") {
     cleanNode("master") {
-//        unstash "repo"
-//        unstash "output"
         println "Artifact uploaded to REPOSITORY... FIX ME TO DO SOMETHING USEFUL HERE"
     }
 }
-
-stageWithGuart("Deploy") {
-    cleanNode("master") {
-        println "Deploying to target....... FIX ME TO DO SOMETHING USEFUL HERE"
-    }
-}
-
 
 stageWithGuard("Dance") {
     pipelineSuccess()
