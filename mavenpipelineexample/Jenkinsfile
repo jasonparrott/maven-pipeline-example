@@ -5,9 +5,9 @@ MERGE_BRANCH_PREFIX = "ready"
 GIT_REPO="git@github.com:jasonparrott/maven-pipeline-example.git"
 SSH_AGENT_ID="jasonparrott"
 
-BUILD_COMMAND="mvn clean test"
-PACKAGE_COMMAND="mvn package"
-VERIFY_COMMAND="mvn test"
+BUILD_COMMAND="mvn -f mavenpipelineexample/pom.xml clean test"
+PACKAGE_COMMAND="mvn -f mavenpipelineexample/pom.xml package"
+VERIFY_COMMAND="mvn -f mavenpipelineexample/pom.xml test"
 
 // State
 inputSHA = "" // Why can't Jenkins tell me this?!
