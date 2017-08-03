@@ -158,7 +158,7 @@ git submodule update --init --recursive
                     withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
                         sh "${BUILD_COMMAND}"
                     }
-                    stash name: "output", includes: "target/**"
+                    //stash name: "output", includes: "target/**"
                 }
       //      }
       //  ]
@@ -238,7 +238,7 @@ verifyLinux("linux", "${VERIFY_COMMAND}")
 stageWithGuard("Upload") {
     cleanNode("master") {
         unstash "repo"
-        unstash "output"
+//        unstash "output"
         println "Artifact uploaded to REPOSITORY... FIX ME TO DO SOMETHING USEFUL HERE"
     }
 }
