@@ -102,7 +102,7 @@ conditionalLock(shouldMerge(), "pipeline-merge-lock") {
             buildNumber = currentBuild.number;
             currentBuild.displayName = "${currentBuild.displayName} (${buildNumber})"
             sshagent (credentials: ["${SSH_AGENT_ID}"]) {
-                timeout(1) {
+                timeout(60) {
                     sh "git clone --no-checkout ${GIT_REPO} ."
                 }
 
@@ -111,7 +111,7 @@ conditionalLock(shouldMerge(), "pipeline-merge-lock") {
                 authorEmail = sh(script: "git log -1 --format='%ae' ${inputSHA}", returnStdout: true).trim()
                 authorFull = "${authorName} <${authorEmail}>"
 
-                timeout(2) {
+                timeout(120) {
                     if (shouldMerge()) {
                         sh """
 git config user.email "${authorEmail}"
@@ -172,7 +172,7 @@ git submodule update --init --recursive
                 unstash "repo"
 
                 sshagent (credentials: ["${SSH_AGENT_ID}"]) {
-                    timeout(1) {
+                    timeout(30) {
                         sh """
 git push origin ${TARGET_BRANCH_NAME}
 git fetch
