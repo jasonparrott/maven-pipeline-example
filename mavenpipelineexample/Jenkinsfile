@@ -148,8 +148,8 @@ git submodule update --init --recursive
 
     stageWithGuard("Build") {
     // only 1 builder, but could do multiple in parallel if needed
-        def builders = [
-            "standard": {
+    //    def builders = [
+    //        "standard": {
                 cleanNode("standard") {
                     unstash "repo"
                     sh "ls"
@@ -159,10 +159,10 @@ git submodule update --init --recursive
                     }
                     stash name: "output", includes: "target/**"
                 }
-            }
-        ]
+      //      }
+      //  ]
 
-        parallel builders
+      //  parallel builders
     }
 
 
@@ -191,8 +191,8 @@ fi
 // TODO: Any testing/integration/verification done prior to packaging
 
 stageWithGuard("Package") {
-    def builders = [
-        "standard": {
+    //def builders = [
+    //    "standard": {
             cleanNode("linux") {
                 unstash "repo"
                 def mvn_version = 'M350'
@@ -200,10 +200,10 @@ stageWithGuard("Package") {
                     sh "${PACKAGE_COMMAND}"
                 }
             }
-        }
-    ]
+    //    }
+    //]
 
-    parallel builders
+    //parallel builders
 }
 
 
@@ -223,11 +223,13 @@ def verifyLinux(_node, _script) {
 }
 
 stageWithGuard("Verify") {
-    def builders = [
-        "linux":   verifyLinux("linux", "${VERIFY_COMMAND}")
-    ]
+//    def builders = [
+//        "linux":   verifyLinux("linux", "${VERIFY_COMMAND}")
+//    ]
 
-    parallel builders
+verifyLinux("linux", "${VERIFY_COMMAND}")
+
+//    parallel builders
 }
 
 
