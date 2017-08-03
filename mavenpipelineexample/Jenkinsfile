@@ -76,8 +76,9 @@ def stageWithGuard(name, closure) {
 //Locking resources in order to for example make sure that only one branch is tried integrated at a time.
 def conditionalLock(condition, name, closure) {
     if (condition) {
-        println "Running under lock: ${name}"
-        lock(name, closure)
+        println "FIXME: Skipping lock as its not found in the DSL. Should be running under lock: ${name}"
+        //lock(name, closure)
+        closure.call()
     } else {
         println "Running without lock"
         closure.call()
