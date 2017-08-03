@@ -153,7 +153,10 @@ git submodule update --init --recursive
                 cleanNode("standard") {
                     unstash "repo"
                     sh "ls"
-                    sh "${BUILD_COMMAND}"
+                    def mvn_version = 'M350'
+                    withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+                        sh "${BUILD_COMMAND}"
+                    }
                     stash name: "output", includes: "target/**"
                 }
             }
@@ -192,7 +195,10 @@ stageWithGuard("Package") {
         "standard": {
             cleanNode("linux") {
                 unstash "repo"
-                sh "${PACKAGE_COMMAND}"
+                def mvn_version = 'M350'
+                withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+                    sh "${PACKAGE_COMMAND}"
+                }
             }
         }
     ]
@@ -207,7 +213,10 @@ def verifyLinux(_node, _script) {
             unstash "repo"
             // TODO: Unstash anything else needed for the verify on this platform
             wrap([$class: "AnsiColorBuildWrapper", "colorMapName": "XTerm"]) {
-                sh _script
+                def mvn_version = 'M3'
+                withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+                    sh _script
+                }
             }
         }
     }
